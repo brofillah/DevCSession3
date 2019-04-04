@@ -270,43 +270,42 @@ function findData(){
         getData()
     } else{
         let index = ""
-        let i = 0
-        data.forEach(val =>{
-            if (val.name.toUpperCase() == keyword.toUpperCase() || val.rotation_period.toUpperCase() == keyword.toUpperCase() || val.orbital_period.toUpperCase() == keyword.toUpperCase() || val.diameter.toUpperCase() == keyword.toUpperCase() || val.climate.toUpperCase() == keyword.toUpperCase() || val.gravity.toUpperCase() == keyword.toUpperCase() || val.terrain.toUpperCase() == keyword.toUpperCase() || val.surface_water.toUpperCase() == keyword.toUpperCase() || val.population.toUpperCase() == keyword.toUpperCase() || val.created.toUpperCase() == keyword.toUpperCase() || val.edited.toUpperCase() == keyword.toUpperCase() || val.url.toUpperCase() == keyword.toUpperCase()) {
+        let no = 0
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].name.toUpperCase() == keyword.toUpperCase() || data[i].rotation_period.toUpperCase() == keyword.toUpperCase() || data[i].orbital_period.toUpperCase() == keyword.toUpperCase() || data[i].diameter.toUpperCase() == keyword.toUpperCase() || data[i].climate.toUpperCase() == keyword.toUpperCase() || data[i].gravity.toUpperCase() == keyword.toUpperCase() || data[i].terrain.toUpperCase() == keyword.toUpperCase() || data[i].surface_water.toUpperCase() == keyword.toUpperCase() || data[i].population.toUpperCase() == keyword.toUpperCase() || data[i].created.toUpperCase() == keyword.toUpperCase() || data[i].edited.toUpperCase() == keyword.toUpperCase() || data[i].url.toUpperCase() == keyword.toUpperCase()) {
                 index += `
-                    <tr>
-                        <td>${i++}</td>
-                        <td>${val.name}</td>
-                        <td>${val.rotation_period}</td>
-                        <td>${val.orbital_period}</td>
-                        <td>${val.diameter}</td>
-                        <td>${val.climate}</td>
-                        <td>${val.gravity}</td>
-                        <td>${val.terrain}</td>
-                        <td>${val.surface_water}</td>
-                        <td>${val.population}</td>
-                        <td>`
-                        if(val.residents != ""){
-                            val.residents.forEach(res => {
-                                index += `<li>${res}</li>`;
-                            })
-                        }
-                        index += `</td>
-                        <td>`
-                        if (val.films != "") {
-                            val.films.forEach(film => {
-                                index += `<li>${film}</li>`
-                            })
-                        }
-                        index += `</td>
-                        <td>${val.created}</td>
-                        <td>${val.edited}</td>
-                        <td>${val.url}</td>    
-                    </tr>`;
-            }else{
-                index += '<td colspan="4><h4>Data tidak ditemukan!</h4></td>'
+                            <tr>
+                                <td>${no++}</td>
+                                <td>${data[i].name}</td>
+                                <td>${data[i].rotation_period}</td>
+                                <td>${data[i].orbital_period}</td>
+                                <td>${data[i].diameter}</td>
+                                <td>${data[i].climate}</td>
+                                <td>${data[i].gravity}</td>
+                                <td>${data[i].terrain}</td>
+                                <td>${data[i].surface_water}</td>
+                                <td>${data[i].population}</td>
+                                <td>`
+                                if(data[i].residents != ""){
+                                    data[i].residents.forEach(res => {
+                                        index += `<li>${res}</li>`;
+                                    })
+                                }
+                                index += `</td>
+                                <td>`
+                                if (data[i].films != "") {
+                                    data[i].films.forEach(film => {
+                                        index += `<li>${film}</li>`
+                                    })
+                                }
+                                index += `</td>
+                                <td>${data[i].created}</td>
+                                <td>${data[i].edited}</td>
+                                <td>${data[i].url}</td>    
+                            </tr>`;
+                        document.getElementById('el').innerHTML = index
+                        console.log(data[i])
+                    }
             }
-        })
-        document.getElementById('el').innerHTML = index
-    }
+        }
 }
