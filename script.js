@@ -224,53 +224,89 @@ let data = [
 // for (let i = 0; i < data.length; i++) {
 //     console.log(data[i])
 // }
-let index = ""
-let i = 1;
-data.forEach(val => {
-    index += `
-        <tr>
-            <td>${i++}</td>
-            <td>${val.name}</td>
-            <td>${val.rotation_period}</td>
-            <td>${val.orbital_period}</td>
-            <td>${val.diameter}</td>
-            <td>${val.climate}</td>
-            <td>${val.gravity}</td>
-            <td>${val.terrain}</td>
-            <td>${val.surface_water}</td>
-            <td>${val.population}</td>
-            <td>`
-            if(val.residents != ""){
-                val.residents.forEach(res => {
-                    index += `<li>${res}</li>`;
-                })
-            }
-            index += `</td>
-            <td>`
-            if (val.films != "") {
-                val.films.forEach(film => {
-                    index += `<li>${film}</li>`
-                })
-            }
-            index += `</td>
-            <td>${val.created}</td>
-            <td>${val.edited}</td>
-            <td>${val.url}</td>    
-        </tr>`;
-    
-})
-document.getElementById('el').innerHTML = index
+function getData(){
+    let index = ""
+    let i = 1;
+    data.forEach(val => {
+        index += `
+            <tr>
+                <td>${i++}</td>
+                <td>${val.name}</td>
+                <td>${val.rotation_period}</td>
+                <td>${val.orbital_period}</td>
+                <td>${val.diameter}</td>
+                <td>${val.climate}</td>
+                <td>${val.gravity}</td>
+                <td>${val.terrain}</td>
+                <td>${val.surface_water}</td>
+                <td>${val.population}</td>
+                <td>`
+                if(val.residents != ""){
+                    val.residents.forEach(res => {
+                        index += `<li>${res}</li>`;
+                    })
+                }
+                index += `</td>
+                <td>`
+                if (val.films != "") {
+                    val.films.forEach(film => {
+                        index += `<li>${film}</li>`
+                    })
+                }
+                index += `</td>
+                <td>${val.created}</td>
+                <td>${val.edited}</td>
+                <td>${val.url}</td>    
+            </tr>`;
+        
+    })
+    document.getElementById('el').innerHTML = index
+}
+getData()
 
 function findData(){
-    input = document.getElementById("txtSearch");
-    filter = input.value.toUpperCase();
-    el = document.getElementById('el')
-    tr = el.getElementsByTagName("tr")
-
-    for (let i = 0; i < tr.length; i++) {
-        const element = array[index];
-        
+    let keyword = document.getElementById('txtSearch').value
+    if(keyword == ""){
+        getData()
+    } else{
+        let index = ""
+        let i = 0
+        data.forEach(val =>{
+            if (val.name.toUpperCase() == keyword.toUpperCase() || val.rotation_period.toUpperCase() == keyword.toUpperCase() || val.orbital_period.toUpperCase() == keyword.toUpperCase() || val.diameter.toUpperCase() == keyword.toUpperCase() || val.climate.toUpperCase() == keyword.toUpperCase() || val.gravity.toUpperCase() == keyword.toUpperCase() || val.terrain.toUpperCase() == keyword.toUpperCase() || val.surface_water.toUpperCase() == keyword.toUpperCase() || val.population.toUpperCase() == keyword.toUpperCase() || val.created.toUpperCase() == keyword.toUpperCase() || val.edited.toUpperCase() == keyword.toUpperCase() || val.url.toUpperCase() == keyword.toUpperCase()) {
+                index += `
+                    <tr>
+                        <td>${i++}</td>
+                        <td>${val.name}</td>
+                        <td>${val.rotation_period}</td>
+                        <td>${val.orbital_period}</td>
+                        <td>${val.diameter}</td>
+                        <td>${val.climate}</td>
+                        <td>${val.gravity}</td>
+                        <td>${val.terrain}</td>
+                        <td>${val.surface_water}</td>
+                        <td>${val.population}</td>
+                        <td>`
+                        if(val.residents != ""){
+                            val.residents.forEach(res => {
+                                index += `<li>${res}</li>`;
+                            })
+                        }
+                        index += `</td>
+                        <td>`
+                        if (val.films != "") {
+                            val.films.forEach(film => {
+                                index += `<li>${film}</li>`
+                            })
+                        }
+                        index += `</td>
+                        <td>${val.created}</td>
+                        <td>${val.edited}</td>
+                        <td>${val.url}</td>    
+                    </tr>`;
+            }else{
+                index += '<td colspan="4><h4>Data tidak ditemukan!</h4></td>'
+            }
+        })
+        document.getElementById('el').innerHTML = index
     }
-
-    console.log(filter)
 }
